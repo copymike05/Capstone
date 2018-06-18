@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CapstoneReworked.Models.RSVP>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Attending)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GuestNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodItems)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Allergies)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attending)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GuestNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.totalFoodList)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Allergies)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        
+    </tr>
+}
+
+</table>

@@ -50,6 +50,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -198,40 +200,338 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RSVPsController.cs" />
+    <Compile Include="EmailSender.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FoodCategory.cs">
+      <DependentUpon>RSVP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FoodMenu.cs">
+      <DependentUpon>RSVP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Partials\RSVP.cs" />
+    <Compile Include="Models\RSVP.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RSVP.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RSVP.cs">
+      <DependentUpon>RSVP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RSVP.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RSVP.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RSVP1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RSVP.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RSVPViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\ContactViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\magnific-popup.css" />
+    <Content Include="Content\owl.carousel.min.css" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\font-awesome\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\about-me%402x.jpg" />
+    <Content Include="Images\about-me-2%402x.jpg" />
+    <Content Include="Images\about-me-2.jpg" />
+    <Content Include="Images\about-me.jpg" />
+    <Content Include="Images\about-us%402x.jpg" />
+    <Content Include="Images\about-us.jpg" />
+    <Content Include="Images\about-widget%402x.jpg" />
+    <Content Include="Images\about-widget.jpg" />
+    <Content Include="Images\avatar-1%402x.jpg" />
+    <Content Include="Images\avatar-1.jpg" />
+    <Content Include="Images\avatar-2%402x.jpg" />
+    <Content Include="Images\avatar-2.jpg" />
+    <Content Include="Images\avatar-3%402x.jpg" />
+    <Content Include="Images\avatar-3.jpg" />
+    <Content Include="Images\avatar-4%402x.jpg" />
+    <Content Include="Images\avatar-4.jpg" />
+    <Content Include="Images\avatar-5%402x.jpg" />
+    <Content Include="Images\avatar-5.jpg" />
+    <Content Include="Images\avatar-6%402x.jpg" />
+    <Content Include="Images\avatar-6.jpg" />
+    <Content Include="Images\banner-1%402x.jpg" />
+    <Content Include="Images\banner-1.jpg" />
+    <Content Include="Images\banner-2%402x.jpg" />
+    <Content Include="Images\banner-2.jpg" />
+    <Content Include="Images\banner-3%402x.jpg" />
+    <Content Include="Images\banner-3.jpg" />
+    <Content Include="Images\carousel-1%402x.jpg" />
+    <Content Include="Images\carousel-1.jpg" />
+    <Content Include="Images\carousel-2%402x.jpg" />
+    <Content Include="Images\carousel-2.jpg" />
+    <Content Include="Images\carousel-3%402x.jpg" />
+    <Content Include="Images\carousel-3.jpg" />
+    <Content Include="Images\carousel-4%402x.jpg" />
+    <Content Include="Images\carousel-4.jpg" />
+    <Content Include="Images\carousel-5%402x.jpg" />
+    <Content Include="Images\carousel-5.jpg" />
+    <Content Include="Images\carousel-6%402x.jpg" />
+    <Content Include="Images\carousel-6.jpg" />
+    <Content Include="Images\Family 10.jpg" />
+    <Content Include="Images\Family 11.jpg" />
+    <Content Include="Images\Family 12.jpg" />
+    <Content Include="Images\Family 13.jpg" />
+    <Content Include="Images\Family 14.jpg" />
+    <Content Include="Images\Family 15.jpg" />
+    <Content Include="Images\Family 17.jpg" />
+    <Content Include="Images\Family 17Photo.jpg" />
+    <Content Include="Images\Family 18.jpg" />
+    <Content Include="Images\Family 18a.png" />
+    <Content Include="Images\Family 18b.png" />
+    <Content Include="Images\Family 18bb.jpg" />
+    <Content Include="Images\Family 19.jpg" />
+    <Content Include="Images\Family 19Photo.jpg" />
+    <Content Include="Images\Family 2.jpg" />
+    <Content Include="Images\Family 20.jpg" />
+    <Content Include="Images\Family 20a.png" />
+    <Content Include="Images\Family 21.jpg" />
+    <Content Include="Images\Family 22.jpg" />
+    <Content Include="Images\Family 23.jpg" />
+    <Content Include="Images\Family 24.jpg" />
+    <Content Include="Images\Family 26.jpg" />
+    <Content Include="Images\Family 3Photo.jpg" />
+    <Content Include="Images\Family 3.jpg" />
+    <Content Include="Images\Family 5.jpg" />
+    <Content Include="Images\Family 6.jpg" />
+    <Content Include="Images\Family 6Picture.jpg" />
+    <Content Include="Images\Family 7.jpg" />
+    <Content Include="Images\Family 7Photo1.jpg" />
+    <Content Include="Images\Family 7Photo1a.jpg" />
+    <Content Include="Images\Family 8.jpg" />
+    <Content Include="Images\Family 9.jpg" />
+    <Content Include="Images\Family Photo.JPG" />
+    <Content Include="Images\Family8.jpg" />
+    <Content Include="Images\Family4.jpg" />
+    <Content Include="Images\FamilyGroup.jpg" />
+    <Content Include="Images\footer-1%402x.jpg" />
+    <Content Include="Images\footer-1.jpg" />
+    <Content Include="Images\footer-2%402x.jpg" />
+    <Content Include="Images\footer-2.jpg" />
+    <Content Include="Images\footer-3%402x.jpg" />
+    <Content Include="Images\footer-3.jpg" />
+    <Content Include="Images\footer-4%402x.jpg" />
+    <Content Include="Images\footer-4.jpg" />
+    <Content Include="Images\footer-5%402x.jpg" />
+    <Content Include="Images\footer-5.jpg" />
+    <Content Include="Images\footer-6%402x.jpg" />
+    <Content Include="Images\footer-6.jpg" />
+    <Content Include="Images\footer-7%402x.jpg" />
+    <Content Include="Images\footer-7.jpg" />
+    <Content Include="Images\footer-8%402x.jpg" />
+    <Content Include="Images\footer-8.jpg" />
+    <Content Include="Images\IMG_0355.JPG" />
+    <Content Include="Images\IMG_0355a.jpg" />
+    <Content Include="Images\IMG_0632.JPG" />
+    <Content Include="Images\IMG_1178.JPG" />
+    <Content Include="Images\page-header-2.jpg" />
+    <Content Include="Images\page-header.jpg" />
+    <Content Include="Images\post-1-1098%402x.jpg" />
+    <Content Include="Images\post-1-1098.jpg" />
+    <Content Include="Images\post-1-338%402x.jpg" />
+    <Content Include="Images\post-1-338.jpg" />
+    <Content Include="Images\post-1-350%402x.jpg" />
+    <Content Include="Images\post-1-350.jpg" />
+    <Content Include="Images\post-1-430%402x.jpg" />
+    <Content Include="Images\post-1-430.jpg" />
+    <Content Include="Images\post-1-509%402x.jpg" />
+    <Content Include="Images\post-1-509.jpg" />
+    <Content Include="Images\post-1-528%402x.jpg" />
+    <Content Include="Images\post-1-528.jpg" />
+    <Content Include="Images\post-1-718%402x.jpg" />
+    <Content Include="Images\post-1-718.jpg" />
+    <Content Include="Images\post-2-1098%402x.jpg" />
+    <Content Include="Images\post-2-1098.jpg" />
+    <Content Include="Images\post-2-338%402x.jpg" />
+    <Content Include="Images\post-2-338.jpg" />
+    <Content Include="Images\post-2-350%402x.jpg" />
+    <Content Include="Images\post-2-350.jpg" />
+    <Content Include="Images\post-2-430%402x.jpg" />
+    <Content Include="Images\post-2-430.jpg" />
+    <Content Include="Images\post-2-509%402x.jpg" />
+    <Content Include="Images\post-2-509.jpg" />
+    <Content Include="Images\post-2-528%402x.jpg" />
+    <Content Include="Images\post-2-528.jpg" />
+    <Content Include="Images\post-2-718%402x.jpg" />
+    <Content Include="Images\post-2-718.jpg" />
+    <Content Include="Images\post-3-1098%402x.jpg" />
+    <Content Include="Images\post-3-1098.jpg" />
+    <Content Include="Images\post-3-338%402x.jpg" />
+    <Content Include="Images\post-3-338.jpg" />
+    <Content Include="Images\post-3-350%402x.jpg" />
+    <Content Include="Images\post-3-350.jpg" />
+    <Content Include="Images\post-3-430%402x.jpg" />
+    <Content Include="Images\post-3-430.jpg" />
+    <Content Include="Images\post-3-509%402x.jpg" />
+    <Content Include="Images\post-3-509.jpg" />
+    <Content Include="Images\post-3-528%402x.jpg" />
+    <Content Include="Images\post-3-528.jpg" />
+    <Content Include="Images\post-3-718%402x.jpg" />
+    <Content Include="Images\post-3-718.jpg" />
+    <Content Include="Images\post-4-1098%402x.jpg" />
+    <Content Include="Images\post-4-1098.jpg" />
+    <Content Include="Images\post-4-338%402x.jpg" />
+    <Content Include="Images\post-4-338.jpg" />
+    <Content Include="Images\post-4-350%402x.jpg" />
+    <Content Include="Images\post-4-350.jpg" />
+    <Content Include="Images\post-4-430%402x.jpg" />
+    <Content Include="Images\post-4-430.jpg" />
+    <Content Include="Images\post-4-509%402x.jpg" />
+    <Content Include="Images\post-4-509.jpg" />
+    <Content Include="Images\post-4-528%402x.jpg" />
+    <Content Include="Images\post-4-528.jpg" />
+    <Content Include="Images\post-4-718%402x.jpg" />
+    <Content Include="Images\post-4-718.jpg" />
+    <Content Include="Images\post-5-1098%402x.jpg" />
+    <Content Include="Images\post-5-1098.jpg" />
+    <Content Include="Images\post-5-338%402x.jpg" />
+    <Content Include="Images\post-5-338.jpg" />
+    <Content Include="Images\post-5-350%402x.jpg" />
+    <Content Include="Images\post-5-350.jpg" />
+    <Content Include="Images\post-5-430%402x.jpg" />
+    <Content Include="Images\post-5-430.jpg" />
+    <Content Include="Images\post-5-509%402x.jpg" />
+    <Content Include="Images\post-5-509.jpg" />
+    <Content Include="Images\post-5-528%402x.jpg" />
+    <Content Include="Images\post-5-528.jpg" />
+    <Content Include="Images\post-5-718%402x.jpg" />
+    <Content Include="Images\post-5-718.jpg" />
+    <Content Include="Images\post-6-338%402x.jpg" />
+    <Content Include="Images\post-6-338.jpg" />
+    <Content Include="Images\post-6-350%402x.jpg" />
+    <Content Include="Images\post-6-350.jpg" />
+    <Content Include="Images\post-6-430%402x.jpg" />
+    <Content Include="Images\post-6-430.jpg" />
+    <Content Include="Images\post-6-509%402x.jpg" />
+    <Content Include="Images\post-6-509.jpg" />
+    <Content Include="Images\post-6-528%402x.jpg" />
+    <Content Include="Images\post-6-528.jpg" />
+    <Content Include="Images\post-7-509%402x.jpg" />
+    <Content Include="Images\post-7-509.jpg" />
+    <Content Include="Images\post-7-528%402x.jpg" />
+    <Content Include="Images\post-7-528.jpg" />
+    <Content Include="Images\post-8-509%402x.jpg" />
+    <Content Include="Images\post-8-509.jpg" />
+    <Content Include="Images\post-8-528%402x.jpg" />
+    <Content Include="Images\post-8-528.jpg" />
+    <Content Include="Images\post-widget-1%402x.jpg" />
+    <Content Include="Images\post-widget-1.jpg" />
+    <Content Include="Images\post-widget-2%402x.jpg" />
+    <Content Include="Images\post-widget-2.jpg" />
+    <Content Include="Images\post-widget-3%402x.jpg" />
+    <Content Include="Images\post-widget-3.jpg" />
+    <Content Include="Images\post-widget-4%402x.jpg" />
+    <Content Include="Images\post-widget-4.jpg" />
+    <Content Include="Images\slide-1%402x.jpg" />
+    <Content Include="Images\slide-1.jpg" />
+    <Content Include="Images\slide-10.jpg" />
+    <Content Include="Images\slide-11.jpg" />
+    <Content Include="Images\slide-12.jpg" />
+    <Content Include="Images\slide-2%402x.jpg" />
+    <Content Include="Images\slide-2.jpg" />
+    <Content Include="Images\slide-3%402x.jpg" />
+    <Content Include="Images\slide-3.jpg" />
+    <Content Include="Images\slide-4%402x.jpg" />
+    <Content Include="Images\slide-4.jpg" />
+    <Content Include="Images\slide-5%402x.jpg" />
+    <Content Include="Images\slide-5.jpg" />
+    <Content Include="Images\slide-6%402x.jpg" />
+    <Content Include="Images\slide-6.jpg" />
+    <Content Include="Images\slide-7%402x.jpg" />
+    <Content Include="Images\slide-7.jpg" />
+    <Content Include="Images\slide-8%402x.jpg" />
+    <Content Include="Images\slide-8.jpg" />
+    <Content Include="Images\slide-9.jpg" />
+    <Content Include="Images\widget-banner%402x.jpg" />
+    <Content Include="Images\widget-banner.jpg" />
+    <Content Include="Images\widget-gallery-1%402x.jpg" />
+    <Content Include="Images\widget-gallery-1.jpg" />
+    <Content Include="Images\widget-gallery-2%402x.jpg" />
+    <Content Include="Images\widget-gallery-2.jpg" />
+    <Content Include="Images\widget-gallery-3%402x.jpg" />
+    <Content Include="Images\widget-gallery-3.jpg" />
+    <Content Include="Images\widget-gallery-4%402x.jpg" />
+    <Content Include="Images\widget-gallery-4.jpg" />
+    <Content Include="Images\widget-gallery-5%402x.jpg" />
+    <Content Include="Images\widget-gallery-5.jpg" />
+    <Content Include="Images\widget-gallery-6%402x.jpg" />
+    <Content Include="Images\widget-gallery-6.jpg" />
+    <Content Include="Images\widget-gallery-big-1.jpg" />
+    <Content Include="Images\widget-gallery-big-2.jpg" />
+    <Content Include="Images\widget-gallery-big-3.jpg" />
+    <Content Include="Images\widget-gallery-big-4.jpg" />
+    <Content Include="Images\widget-gallery-big-5.jpg" />
+    <Content Include="Images\widget-gallery-big-6.jpg" />
+    <Content Include="Models\RSVP.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RSVP.edmx</DependentUpon>
+      <LastGenOutput>RSVP.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\RSVP.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RSVP.edmx</DependentUpon>
+      <LastGenOutput>RSVP1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\appear.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="fonts\font-awesome\fontawesome-webfont.eot" />
+    <Content Include="fonts\font-awesome\fontawesome-webfont.ttf" />
+    <Content Include="fonts\font-awesome\fontawesome-webfont.woff" />
+    <Content Include="fonts\font-awesome\fontawesome-webfont.woff2" />
+    <Content Include="fonts\font-awesome\FontAwesome.otf" />
+    <EntityDeploy Include="Models\RSVP.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RSVP.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\RSVP.edmx.diagram">
+      <DependentUpon>RSVP.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-migrate-1.4.1.min.js" />
+    <Content Include="Scripts\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\jquery.touchwipe.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\masonry.pkgd.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\owl.carousel.min.js" />
+    <Content Include="Scripts\tether.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -266,6 +566,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\RSVPs\Create.cshtml" />
+    <Content Include="Views\Home\Event.cshtml" />
+    <Content Include="Views\RSVPs\Createcopy.cshtml" />
+    <Content Include="Views\RSVPs\Delete.cshtml" />
+    <Content Include="Views\RSVPs\Details.cshtml" />
+    <Content Include="Views\RSVPs\Edit.cshtml" />
+    <Content Include="Views\RSVPs\Index.cshtml" />
+    <Content Include="Views\RSVPs\RSVPMaybe.cshtml" />
+    <Content Include="Views\RSVPs\RSVPNo.cshtml" />
+    <Content Include="Views\RSVPs\RSVPYes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -282,6 +592,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

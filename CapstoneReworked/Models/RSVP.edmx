@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CapstoneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FoodCategory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FoodMenu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="FoodCategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RSVP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Attending" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GuestNumber" Type="int" />
+          <Property Name="FoodItems" Type="varchar" MaxLength="50" />
+          <Property Name="Allergies" Type="varchar" MaxLength="50" />
+          <Property Name="Comments" Type="varchar" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RSVPFoodItems">
+          <Key>
+            <PropertyRef Name="idRSVP" />
+            <PropertyRef Name="idFoodMenu" />
+          </Key>
+          <Property Name="idRSVP" Type="int" Nullable="false" />
+          <Property Name="idFoodMenu" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__FoodMenu__FoodCa__5FB337D6">
+          <End Role="FoodCategory" Type="Self.FoodCategory" Multiplicity="1" />
+          <End Role="FoodMenu" Type="Self.FoodMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodCategory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FoodMenu">
+              <PropertyRef Name="FoodCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RSVPFoodI__idFoo__6383C8BA">
+          <End Role="FoodMenu" Type="Self.FoodMenu" Multiplicity="1" />
+          <End Role="RSVPFoodItems" Type="Self.RSVPFoodItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodMenu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RSVPFoodItems">
+              <PropertyRef Name="idFoodMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RSVPFoodI__idRSV__628FA481">
+          <End Role="RSVP" Type="Self.RSVP" Multiplicity="1" />
+          <End Role="RSVPFoodItems" Type="Self.RSVPFoodItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RSVP">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RSVPFoodItems">
+              <PropertyRef Name="idRSVP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CapstoneModelStoreContainer">
+          <EntitySet Name="FoodCategory" EntityType="Self.FoodCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FoodMenu" EntityType="Self.FoodMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RSVP" EntityType="Self.RSVP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RSVPFoodItems" EntityType="Self.RSVPFoodItems" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__FoodMenu__FoodCa__5FB337D6" Association="Self.FK__FoodMenu__FoodCa__5FB337D6">
+            <End Role="FoodCategory" EntitySet="FoodCategory" />
+            <End Role="FoodMenu" EntitySet="FoodMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RSVPFoodI__idFoo__6383C8BA" Association="Self.FK__RSVPFoodI__idFoo__6383C8BA">
+            <End Role="FoodMenu" EntitySet="FoodMenu" />
+            <End Role="RSVPFoodItems" EntitySet="RSVPFoodItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RSVPFoodI__idRSV__628FA481" Association="Self.FK__RSVPFoodI__idRSV__628FA481">
+            <End Role="RSVP" EntitySet="RSVP" />
+            <End Role="RSVPFoodItems" EntitySet="RSVPFoodItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CapstoneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CapstoneEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RSVPs" EntityType="CapstoneModel.RSVP" />
+          <EntitySet Name="FoodCategories" EntityType="CapstoneModel.FoodCategory" />
+          <EntitySet Name="FoodMenus" EntityType="CapstoneModel.FoodMenu" />
+          <AssociationSet Name="FK__FoodMenu__FoodCa__5FB337D6" Association="CapstoneModel.FK__FoodMenu__FoodCa__5FB337D6">
+            <End Role="FoodCategory" EntitySet="FoodCategories" />
+            <End Role="FoodMenu" EntitySet="FoodMenus" />
+          </AssociationSet>
+          <AssociationSet Name="RSVPFoodItems" Association="CapstoneModel.RSVPFoodItems">
+            <End Role="FoodMenu" EntitySet="FoodMenus" />
+            <End Role="RSVP" EntitySet="RSVPs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="RSVP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Attending" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GuestNumber" Type="Int32" />
+          <Property Name="FoodItems" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Allergies" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="FoodMenus" Relationship="CapstoneModel.RSVPFoodItems" FromRole="RSVP" ToRole="FoodMenu" />
+        </EntityType>
+        <EntityType Name="FoodCategory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FoodMenus" Relationship="CapstoneModel.FK__FoodMenu__FoodCa__5FB337D6" FromRole="FoodCategory" ToRole="FoodMenu" />
+        </EntityType>
+        <EntityType Name="FoodMenu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FoodCategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FoodCategory" Relationship="CapstoneModel.FK__FoodMenu__FoodCa__5FB337D6" FromRole="FoodMenu" ToRole="FoodCategory" />
+          <NavigationProperty Name="RSVPs" Relationship="CapstoneModel.RSVPFoodItems" FromRole="FoodMenu" ToRole="RSVP" />
+        </EntityType>
+        <Association Name="FK__FoodMenu__FoodCa__5FB337D6">
+          <End Type="CapstoneModel.FoodCategory" Role="FoodCategory" Multiplicity="1" />
+          <End Type="CapstoneModel.FoodMenu" Role="FoodMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodCategory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FoodMenu">
+              <PropertyRef Name="FoodCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RSVPFoodItems">
+          <End Type="CapstoneModel.FoodMenu" Role="FoodMenu" Multiplicity="*" />
+          <End Type="CapstoneModel.RSVP" Role="RSVP" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CapstoneModelStoreContainer" CdmEntityContainer="CapstoneEntities">
+          <EntitySetMapping Name="RSVPs">
+            <EntityTypeMapping TypeName="CapstoneModel.RSVP">
+              <MappingFragment StoreEntitySet="RSVP">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Allergies" ColumnName="Allergies" />
+                <ScalarProperty Name="FoodItems" ColumnName="FoodItems" />
+                <ScalarProperty Name="GuestNumber" ColumnName="GuestNumber" />
+                <ScalarProperty Name="Attending" ColumnName="Attending" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FoodCategories">
+            <EntityTypeMapping TypeName="CapstoneModel.FoodCategory">
+              <MappingFragment StoreEntitySet="FoodCategory">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FoodMenus">
+            <EntityTypeMapping TypeName="CapstoneModel.FoodMenu">
+              <MappingFragment StoreEntitySet="FoodMenu">
+                <ScalarProperty Name="FoodCategoryID" ColumnName="FoodCategoryID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="RSVPFoodItems" TypeName="CapstoneModel.RSVPFoodItems" StoreEntitySet="RSVPFoodItems">
+            <EndProperty Name="RSVP">
+              <ScalarProperty Name="ID" ColumnName="idRSVP" />
+            </EndProperty>
+            <EndProperty Name="FoodMenu">
+              <ScalarProperty Name="id" ColumnName="idFoodMenu" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

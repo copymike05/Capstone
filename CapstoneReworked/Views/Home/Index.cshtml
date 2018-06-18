@@ -1,31 +1,131 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+	ViewBag.Title = "Home";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+<main id="main">
+	<div class="container">
+		<div class="slider slider-overlay" data-nav="true" data-dots="true">
+			<div class="slides owl-carousel">
+				<div class="slider-item">
+					<img src="~/Images/FamilyGroup.jpg" width="1098" height="574" alt="Slide">
+					<div class="caption-wrap">
+						<div class="caption text-xs-center">
+							<h2 class="title">The Muller Family Reunion is back!!</h2>
+							<h3 class="subtitle">Saturday, June 23, 2018</h3>
+						</div>
+					</div>
+				</div><!-- .slider-item -->
+
+				<div class="slider-item">
+					<img src="~/Images/Family8.jpg" width="1098" height="574" alt="Slide">
+					<div class="caption-wrap">
+						<div class="caption text-xs-center">
+							<h2 class="title">Catch up with Uncle Bob, Aunt Carol, even cousin Jeff! <br /></h2>
+							<h3 class="subtitle">Enjoy BBQ ribs, porksteaks, and aunt Nancy's famous potato salad.</h3>
+						</div>
+					</div>
+				</div><!-- .slider-item -->
+
+				<div class="slider-item">
+					<img src="~/Images/Family4.jpg" width="1098" height="574" alt="Slide">
+					<div class="caption-wrap">
+						<div class="caption text-xs-center">
+							<h2 class="title">Can't wait to see everyone!</h2>
+							<h3 class="subtitle">Click below to save your spot.</h3>
+							<li class="btn btn-outline-default">@Html.ActionLink("CLICK TO RSVP", "Create", "RSVPs")</li>
+						</div>
+					</div>
+				</div><!-- .slider-item -->
+
+				
+			</div>
+
+			<div class="counter"></div>
+		</div><!-- .slider -->
+
+		<div class="banners">
+			<div class="row">
+				<div class="col-md-4">
+					<a class="banner">
+						<img src="~/Images/Family 6Picture.jpg" alt="">
+						<h4 class="title"></h4>
+					</a>
+				</div>
+				<div class="col-md-4">
+					<a class="banner">
+						<img src="~/Images/Family 19Photo.jpg" alt="">
+						<h4 class="title"></h4>
+					</a>
+				</div>
+				<div class="col-md-4">
+					<a class="banner">
+						<img src="~/Images/Family Photo.jpg" alt="">
+						<h4 class="title"></h4>
+					</a>
+				</div>
+			</div>
+		</div><!-- .banners -->
+
+		<div class="row">
+			<div class="col-xs-12 posts-list">
+				<div class="row grid-layout masonry-layout">
+					<!-- Grid size -->
+					<div class="col-xs-12 col-md-6 grid-sizer"></div>
+
+					<article class="col-xs-12 col-md-6 grid-item">
+						<div class="post bg">
+							<div class="post-media">
+								<a href="post.html">
+									<img class="retina" src="~/Images/Family 24.jpg" width="528" height="500" alt="Post Image">
+								</a>
+							</div>
+
+							<div class="post-header center-align">
+								<div class="tags all-caps"><a href="#"></a></div>
+								<h2 class="post-title"><a href="post.html">Seems like they were born yesterday.</a></h2>
+								<div class="date"></div>
+							</div>
+
+							<div class="post-content">
+								<p>
+									The kids have grown up, now the grandkids are growing up!!
+								</p>
+							</div>
+
+							<div class="clearfix"></div>
+						</div><!-- .post -->
+					</article>
+
+					<article class="col-xs-12 col-md-6 grid-item">
+						<div class="post bg">
+							<div class="post-media">
+								<a>
+									<img class="retina" src="~/Images/Family 7Photo1a.jpg" width="528" height="500" alt="Post Image">
+								</a>
+							</div>
+
+							<div class="post-header center-align">
+								<div class="tags all-caps"><a href="#"></a></div>
+								<h2 class="post-title">This young man is almost in high school</h2>
+								<div class="date"></div>
+							</div>
+
+							<div class="post-content">
+								<p>
+									And he wants to be an Eagle Scout.
+								</p>
+							</div>
+							<div class="clearfix"></div>
+						</div><!-- .post -->
+					</article>
+
+					
+
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</main><!-- #main -->

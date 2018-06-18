@@ -1,0 +1,137 @@
+﻿@{
+	ViewBag.Title = "Event";
+}
+<br />
+<center><h2>@ViewBag.Message</h2></center>
+<main id="main">
+
+
+
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+
+
+		/* The actual timeline (the vertical ruler) */
+		.timeline {
+			position: relative;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+			/* The actual timeline (the vertical ruler) */
+			.timeline::after {
+				content: '';
+				position: absolute;
+				width: 6px;
+				background-color: rgba(0, 0, 0, 0.2);
+				top: 0;
+				bottom: 0;
+				left: 50%;
+				margin-left: -3px;
+			}
+
+		/* Container around content */
+		.abc {
+			padding: 10px 40px;
+			position: relative;
+			background-color: inherit;
+			width: 50%;
+		}
+
+		/* Place the container to the left */
+		.left {
+			left: 0;
+		}
+
+		/* Place the container to the right */
+		.right {
+			left: 50%;
+		}
+
+		/* Add arrows to the left container (pointing right) */
+		.left::before {
+			content: " ";
+			height: 0;
+			position: absolute;
+			top: 22px;
+			width: 0;
+			z-index: 1;
+			right: 30px;
+			border: medium solid white;
+			border-width: 10px 0 10px 10px;
+			border-color: transparent transparent transparent white;
+		}
+
+		/* Add arrows to the right container (pointing left) */
+		.right::before {
+			content: " ";
+			height: 0;
+			position: absolute;
+			top: 22px;
+			width: 0;
+			z-index: 1;
+			left: 30px;
+			border: medium solid white;
+			border-width: 10px 10px 10px 0;
+			border-color: transparent white transparent transparent;
+		}
+
+
+		/* The actual content */
+		.content {
+			padding: 20px 30px;
+			background-color: rgba(0, 0, 0, 0.4);
+			position: relative;
+			border-radius: 6px;
+			color :white;
+		}
+	</style>
+
+	<div class="timeline">
+		<div class="abc left">
+			<div class="content">
+				<h2>12:00-12:30</h2>
+				<p>Doors open and the fun begins!!</p>
+			</div>
+		</div>
+		<div class="abc right">
+			<div class="content">
+				<h2>12:30-2:30</h2>
+				<p>Socialize with family, play games, hope the St. Louis heat plays nice.</p>
+			</div>
+		</div>
+		<div class="abc left">
+			<div class="content">
+				<h2>2:30-3:30</h2>
+				<p>Food preparation and BBQing begins.</p>
+			</div>
+		</div>
+		<div class="abc right">
+			<div class="content">
+				<h2>3:30-5:00</h2>
+				<p>Lunch is served! We'll begin with a prayer by Fr. Joseph.</p>
+			</div>
+		</div>
+		<div class="abc left">
+			<div class="content">
+				<h2>5:00-?????</h2>
+				<p> Family photo occurs at 5:00. After that, we'll keep socializing with family until our vocal cords are sore!</p>
+			</div>
+		</div>
+		<br />
+		
+		<div class="abc right">
+			<h2><u>ReunionLocation</u></h2>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3119.892605911087!2d-90.42227338465958!3d38.559288079624174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87d8ce7ae64cbec3%3A0xad60b512c33766e7!2s37+Orchard+Ln%2C+Kirkwood%2C+MO+63122!5e0!3m2!1sen!2sus!4v1528754554557"
+					width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+		</div>
+		</div>
+
+
+</main><!-- #main -->
+
+
+

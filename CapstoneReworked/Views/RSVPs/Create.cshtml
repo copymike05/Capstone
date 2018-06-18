@@ -1,0 +1,191 @@
+﻿@using CapstoneReworked.Models
+@model RSVPViewModel
+@{
+	ViewBag.Title = "RSVP";
+	int questionindex = 0;
+
+}
+
+<br />
+<center><h2>@ViewBag.Message</h2></center>
+
+<main id="main">
+	<style>
+		.footer-banners {
+			display: none;
+		}
+	</style>
+	<div class="container">
+
+		<div id="wrapper">
+
+			@using (Html.BeginForm())
+			{
+
+				@Html.AntiForgeryToken()
+				if (Model.Name == null)
+				{
+					<div id="@("question" + (++questionindex).ToString())">
+
+
+						@Html.LabelFor(model => model.Name)
+
+						@Html.TextBoxFor(model => model.Name, new { onclick = $"OnAnswer({questionindex})", @class = "width500" })
+
+					</div>
+				}
+
+				else
+				{ @Html.HiddenFor(model => model.Name)}
+			<br />
+
+
+
+
+
+			<!-- Question 1 -->
+			<div id="@("question" + (++questionindex).ToString())">
+
+				<h4>Are you attending the reunion?</h4>
+				<label>
+					@Html.RadioButtonFor(model => model.Attending, "yes", new { onclick = $"OnAnswer({questionindex})" })
+					Yes
+				</label><br />
+
+				<label>
+					@Html.RadioButtonFor(model => model.Attending, "maybe", new { onclick = "OnDecline()" })
+					Maybe
+				</label><br />
+
+				<label>
+					@Html.RadioButtonFor(model => model.Attending, "no", new { onclick = "OnDecline()" })
+					No
+				</label>
+			</div>
+
+			<!-- Question 2 -->
+			<div id="@("question" + (++questionindex).ToString())" hidden>
+
+				<h4>How many guests (including yourself)?</h4>
+
+				<label>
+
+					@Html.EditorFor(model => model.GuestNumber, new { htmlAttributes = new { @class = "form-control", size = "1", onclick = $"OnAnswer({questionindex})" } })
+				</label><br /><br />
+			</div>
+
+			<!-- Question 3 -->
+			<div id="@("question" + (++questionindex).ToString())" hidden>
+				<h4>Please list any food allergies</h4>
+
+				<label>
+					@Html.EditorFor(model => model.Allergies, new { htmlAttributes = new { @class = "form-control", size = "30", onclick = $"OnAnswer({questionindex})" } })
+				</label><br /><br />
+			</div>
+
+			<!-- Question 4 -->
+			<div id="@("question" + (++questionindex).ToString())" hidden>
+				<h4>Select at least 2 food items to bring</h4>
+
+				<fieldset data-role="controlgroup" data-type="horizontal">
+
+
+					@foreach (FoodCategory foodCategory in ((Dictionary<FoodCategory, MultiSelectList>)ViewBag.FoodMenuCategories).Keys.OrderBy(c => c.id))
+					{
+						<h6><u>@foodCategory.name</u></h6>
+
+						foreach (SelectListItem FoodMenuItem in ViewBag.FoodMenuCategories[foodCategory])
+						{
+							var foodID = "fooditems_" + FoodMenuItem.Value.ToString();
+							var foodName = FoodMenuItem.Text;
+							<label for="@foodID">
+								@foodName
+							</label>
+							<input onclick="OnFoodItemSelect(@questionindex,'@foodID', @FoodMenuItem.Value)" type="checkbox" name="@foodID" id="@foodID" value="@foodName">
+						}
+
+					}
+					
+					<h6><u>Other</u></h6>
+					<label for="blue">
+						Your favorite dish
+						@Html.EditorFor(model => model.FoodItems, new { htmlAttributes = new { @class = "form-control", size = "30", onclick = $"OnAnswer({questionindex})" } })
+					</label>
+				
+				</fieldset>
+			</div> <br />
+
+			<!-- Question 5 -->
+			<div id="@("question" + (++questionindex).ToString())" hidden>
+
+				<h4>Additional comments?</h4>
+				<div class="form-group comment-form-comment">
+					<label>
+						@Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control", size = "30", onclick = $"OnAnswer({questionindex})" } })
+					</label>
+
+				</div>
+			</div>
+
+			@Html.ListBoxFor(model => model.FoodMenuIDs, (MultiSelectList)ViewBag.AllFoodMenus, new {style = "display:none;" })
+			<br />
+
+			<input type="submit" id="submission" value="Submit" class="btn btn-default submit" disabled />
+			<button type="reset" class="btn btn-default submit" onclick="resetbutton()">Reset</button>
+
+		}
+		</div><br /><br />
+
+	</div>
+</main><!-- #main -->
+
+
+<script type="text/javascript">
+	function OnAnswer(questionindex) {
+	var question = $('#question' + (questionindex + 1))
+	if (question) {
+	question.attr("hidden", false)
+    }
+
+	if (questionindex == @questionindex) {
+		$("#submission").attr("disabled", false)
+	}
+	else if (questionindex == 1) {
+		$("#submission").attr("disabled", true)
+	}
+
+    if ($('#no').is(':checked')) {
+        question.attr("hidden", true)
+    }
+	}
+
+	function OnDecline() {
+		resetbutton()
+		$("#submission").attr("disabled", false)
+	}
+
+	function resetbutton() {
+
+    for (var i = 2; i <= @questionindex; i++) {
+		$('#question' + (i)).attr("hidden", true)
+	}
+	}
+
+	function OnFoodItemSelect(questionindex, foodMenuSelector, foodMenuID) {
+
+		OnAnswer(questionindex)
+		var ischecked = !!$('#' + foodMenuSelector).attr('checked')
+		var selectedvalues = $('#FoodMenuIDs').val()
+		if (ischecked) {
+			selectedvalues.push(foodMenuID)
+		}
+		else {
+			selectedvalues = selectedvalues.filter(function (x) {return x != foodMenuID });
+		}
+		$('#FoodMenuIDs').val(selectedvalues)
+	}
+
+	$(resetbutton)
+
+</script>
+
