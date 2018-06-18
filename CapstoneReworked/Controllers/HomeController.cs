@@ -18,7 +18,7 @@ namespace CapstoneReworked.Controllers
         }
        
         
-
+        //Home/Event
         public ActionResult Event()
         {
             ViewBag.Message = "Event Timeline";
@@ -27,7 +27,7 @@ namespace CapstoneReworked.Controllers
         }
 
    
-
+        //Home/Contact
         public ActionResult Contact()
         {
             ViewBag.Message = "Contact Us";

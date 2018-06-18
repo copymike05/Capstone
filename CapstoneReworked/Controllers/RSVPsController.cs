@@ -15,11 +15,13 @@ namespace CapstoneReworked.Controllers
     {
         private CapstoneEntities db = new CapstoneEntities();
 
+        //RSVPs/RSVPMaybe
         public ActionResult RSVPMaybe()
         {
             return View();
         }
 
+        //RSVPs/RSVPNo
         public ActionResult RSVPNo()
         {
             return View();
@@ -33,6 +35,7 @@ namespace CapstoneReworked.Controllers
             return View();
         }
 
+        //RSVPs/RSVPYes
         public ActionResult RSVPYes()
         {
             ViewBag.Message = "RSVP";
