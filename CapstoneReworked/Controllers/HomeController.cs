@@ -11,11 +11,12 @@ namespace CapstoneReworked.Controllers
     
     public class HomeController : Controller
     {
+        //Home/Index
         public ActionResult Index()
         {
             return View();
         }
-        //This is the index page that helps all other pages 
+       
         
 
         public ActionResult Event()
@@ -24,6 +25,8 @@ namespace CapstoneReworked.Controllers
 
             return View();
         }
+
+   
 
         public ActionResult Contact()
         {
