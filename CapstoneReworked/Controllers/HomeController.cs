@@ -15,7 +15,7 @@ namespace CapstoneReworked.Controllers
         {
             return View();
         }
-        //just test 
+        //This is the index page that helps all other pages 
         
 
         public ActionResult Event()
