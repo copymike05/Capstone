@@ -15,7 +15,7 @@ namespace CapstoneReworked.Controllers
         {
             return View();
         }
-
+        //just test 
         
 
         public ActionResult Event()
